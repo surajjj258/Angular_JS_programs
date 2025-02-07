@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="studentApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+         var app=angular.module('studentApp',[]);
+    app.controller('studentController', function($scope){
+        $scope.students=[{name:'Rahul', cgpa:8},
+        {name:'Rahul', cgpa:8},
+        {name:'Rahul', cgpa:8},
+        {name:'Rahul', cgpa:8},{name:'Rahul', cgpa:8},{name:'Rahul', cgpa:8},
+    ];
+
+    $scope.showDetails=false;
+    $scope.displayError=false;
+
+    $scope.displayDetails=function(){
+        if($scope.numberOfStudents<=$scope.students.length){
+            $scope.showDetails=true;
+    $scope.displayError=false;
+        }
+
+        else{
+            $scope.showDetails=false;
+    $scope.displayError=true;
+        }
+    };
+    });
+     
+    </script>
+</head>
+<body ng-controller="studentController">
+
+    Students List
+
+    <input type="number" ng-model="numberOfStudents" name="" id="">
+
+    <button ng-click="displayDetails()">DISPLAY</button>
+
+    
+    <div ng-show="showDetails">
+
+        <ul>
+            <li ng-repeat="student in students | limitTo:numberOfStudents">
+                {{student.name}}  {{student.cgpa}}
+            </li>
+        </ul>
+    
+    </div>
+
+    <div ng-show="displayError">
+        Error! Number of students to display is greater
+
+    </div>
+   
+</body>
+</html>

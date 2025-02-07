@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mathApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        var app =angular.module( 'mathApp', [] ); 
+        app.controller('mathController', function($scope){
+            $scope.factorialResult=null;
+            $scope.squareResult=null;
+            $scope.inputNumber=null;
+
+            $scope.calculateFactorial=function(){
+                if($scope.inputNumber>=0){
+                    $scope.factorialResult=calculateFactorial($scope.inputNumber)
+                }
+                else{
+                    alert("Enter a non negative number")
+                    $scope.factorialResult=null
+                }
+            };
+
+            $scope.calculateSquare=function(){
+                if($scope.inputNumber!== null){
+                    $scope.squareResult=$scope.inputNumber * $scope.inputNumber ;
+                }else {
+                    alert("Please enter a number")
+                }
+            };
+
+            function calculateFactorial(n){
+                if(n==0||n==1){
+                    return 1;
+                }
+                else{
+                    return n*calculateFactorial(n-1);
+                }
+            };
+            
+
+        });
+    </script>
+</head>
+<body ng-controller="mathController">
+
+    <input type="number" ng-model="inputNumber">
+    <button ng-click="calculateFactorial()">Factorial</button>
+    <button ng-click="calculateSquare()">Square</button>
+
+    Factorial: {{factorialResult}} <br>
+    Square: {{squareResult}}
+    
+</body>
+</html>

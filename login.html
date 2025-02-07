@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="loginApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script>
+    var app = angular.module('loginApp', []);
+
+    app.controller('loginController', function ($scope) {
+        $scope.username=''
+        $scope.password=''
+        $scope.loginSuccess=false
+        $scope.loginError=false
+
+        $scope.submitForm=function(){
+            if($scope.username==='user' && $scope.password==='pass'){
+                $scope.username=''
+        $scope.password=''
+        $scope.loginSuccess=true
+        $scope.loginError=false
+            }
+            else{
+                $scope.username=''
+        $scope.password=''
+        $scope.loginSuccess=false
+        $scope.loginError=true;
+            }
+        }
+    });
+    </script>
+</head>
+<body ng-controller="loginController">
+    <form ng-submit="submitForm()">
+    Username: <input type="text" ng-model="username"><br>
+    Password: <input type="password" ng-model="password">
+    <button type="submit">Login</button><br>
+</form>
+
+<div ng-show="loginSuccess" style="color: green;">SUCCESS</div>
+
+<div ng-show="loginError" style="color: red;">INVALID</div>
+
+</body>
+</html>

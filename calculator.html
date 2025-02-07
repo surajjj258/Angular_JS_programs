@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="calcApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <script>
+        var app =angular.module( "calcApp", [] ); 
+        app.controller( 'CalcController', function($scope) {
+            $scope.firstNumber=0;
+            $scope.secondNumber=0;
+            $scope.selectedOp='+';
+            $scope.result=0;
+
+            $scope.performCal=function(){
+                var num1=parseFloat($scope.firstNumber)
+                var num2=parseFloat($scope.secondNumber)
+
+                switch($scope.selectedOp){
+                    case '+':$scope.result=$scope.firstNumber+$scope.secondNumber;
+                    break;
+
+                    case '-':$scope.result=$scope.firstNumber-$scope.secondNumber;
+                    break;
+
+                    case '*':$scope.result=$scope.firstNumber*$scope.secondNumber;
+                    break;
+
+                    case '/':
+                        if(num2==0){
+                        alert("Cannot divide by zero")
+                        $scope.result='error'
+                        }
+                        else{
+                        $scope.result=$scope.firstNumber/$scope.secondNumber;
+                    break;
+                        }
+
+                        default: "Invalid"
+                };
+            };
+            });
+    </script>
+</head>
+<body ng-controller="CalcController">
+
+    <input type="number" ng-model="firstNumber">
+
+    <select ng-model="selectedOp">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+
+    <input type="number" ng-model="secondNumber">
+    <button ng-click="performCal()">CALCULATE</button>
+    {{result}}
+    
+</body>
+</html>

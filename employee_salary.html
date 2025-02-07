@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="employeeApp">
+
+<head>
+    <title>Employee List</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <script>
+
+        var app = angular.module('employeeApp', []);
+        app.controller('EmployeeController', function ($scope) {
+            $scope.employees = [{ name: 'Sagar', salary: 50000 },
+            { name: 'Suman', salary: 60000 },
+            { name: 'Thanmayi', salary: 70000 }, { name: 'Thanmayi', salary: 70000 },{ name: 'Thanmayi', salary: 70000 },{ name: 'Thanmayi', salary: 70000 }];
+        });
+    </script>
+    </head>
+
+<body ng-controller='EmployeeController'>
+
+   Name: <input type="text" ng-model="searchName">
+   Salary: <input type="number" ng-model="searchSalary">
+
+   <div ng-if="searchName||searchSalary">
+
+    <ul>
+        <li ng-repeat="employee in filteredEmployees=(employees|filter:{name:searchName, salary:searchSalary})">
+            {{employee.name}}  {{employee.salary}}
+         </li>
+    </ul>
+
+    <div ng-if="filteredEmployees.length===0">
+        No employee found!
+    </div>
+   </div>
+
+   
+</body>
+    </html>
