@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="shoppingApp">
+
+<head>
+  <title>Shopping List App</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="app.js"></script>
+  <style>
+    ul {
+      list-style-type: none;
+    }
+  </style>
+</head>
+
+<body ng-controller="ShoppingController">
+
+    <h2>Shopping List</h2>
+    <ul>
+      <li ng-repeat="item in shoppingItems">
+        {{ item }}
+        <button ng-click="removeItem($index)">Remove</button>
+      </li>
+    </ul>
+    <input type="text" ng-model="newItem" />
+    <button ng-click="addItem()">Add Item</button>
+    <p>{{errortext}}</p>
+  
+</body>
+
+</html>
