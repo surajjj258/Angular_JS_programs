@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="todoApp">
+
+<head>
+  <title>To-Do List</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="app.js"></script>
+  <style>
+    .completed {
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+
+<body ng-controller="TodoController">
+  <h2>To-Do List</h2>
+
+  <div>
+    New Task:
+    <input type="text" ng-model="newTask">
+    <button ng-click="addTask()">Add Task</button>
+  </div>
+
+  <ul>
+    <li ng-repeat="task in tasks">
+      <span ng-class="{ 'completed': task.completed }">{{ task.description }}</span>
+      <button ng-click="editTask(task)">Edit</button>
+      <button ng-click="deleteTask(task)">Delete</button>
+      <input type="checkbox" ng-model="task.completed">
+    </li>
+  </ul>
+</body> 
+
+</html>
