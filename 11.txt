@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="studentApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        var app=angular.module('studentApp',[]);
+        app.controller('studentController',function($scope){
+            $scope.students=[
+                {name:'ravi', email:'ravi@gmail.com'},
+                {name:'rahul', email:'rahul@gmail.com'}
+            ];
+        });
+    </script>
+</head>
+<body ng-controller="studentController">
+
+    Search: <input type="text" ng-model="searchText">
+
+    <ul>
+        <li ng-repeat="student in students|filter:searchText">{{student.name}} - {{student.name|uppercase}} - {{student.email|uppercase}}</li>
+    </ul>
+    
+</body>
+</html>
