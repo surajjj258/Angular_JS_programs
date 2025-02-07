@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="todoApp">
+
+<head>
+  <title>To-Do List</title>
+  <script src=""></script>
+  <style>
+    .completed {
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+
+<body ng-controller="TodoController">
+  <h2>To-Do List</h2>
+
+  <div>
+    New Task:
+    <input type="text" ng-model="newTask">
+    <button ng-click="addTask()">Add Task</button>
+  </div>
+
+  <ul>
+    <li ng-repeat="task in tasks">
+      <span ng-class="{ 'completed': task.completed }">{{ task.description }}</span>
+      <button ng-click="editTask(task)">Edit</button>
+      <button ng-click="deleteTask(task)">Delete</button>
+      <input type="checkbox" ng-model="task.completed">
+    </li>
+  </ul>
+</body> 
+<script>
+    var app = angular.module('todoApp', []);
+
+app.controller('TodoController', function ($scope) {
+  $scope.tasks = [
+    { description: 'Task 1', completed: false },
+    { description: 'Task 2', completed: true },
+    { description: 'Task 3', completed: false }
+  ];
+
+  $scope.newTask = '';
+
+  $scope.addTask = function () {
+    if ($scope.newTask !== '') {
+      $scope.tasks.push({ description: $scope.newTask, completed: false });
+      $scope.newTask = '';
+    }
+    else{
+    alert("Enter a task");
+    }
+  };
+
+  $scope.editTask = function (task) {
+    var updatedTaskDescription = prompt('Edit Task:', task.description);
+    if (updatedTaskDescription !== null) {
+      task.description = updatedTaskDescription;
+    }
+  };
+
+  $scope.deleteTask = function (task) {
+    var confirmDelete = confirm('Are you sure you want to delete this task?');
+    if (confirmDelete) {
+      $scope.tasks.splice($scope.tasks.indexOf(task), 1);
+    }
+  };
+
+});
+
+</script>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="mathApp">
+<head>
+    <title>Math app</title>
+    <script src=""></script>
+</head>
+<body ng-controller="mathController">
+
+    <h1>Math operations using Angular js</h1>
+
+    Enter a number:
+    <input type="number" ng-model="inputNumber">
+
+    <button ng-click="calculateFactorial()">Factorial</button>
+    <button ng-click="calculateSquare()">Square</button>
+
+    <p> Factorial: {{factorialResult}} </p>
+    <p> Square: {{squareResult}} </p>
+    
+</body>
+
+
+<script>
+    var app =angular.module('mathApp',[]);
+    app.controller('mathController',function($scope){
+        $scope.inputNumber=null;
+        $scope.factorialResult=null;
+        $scope.squareResult=null;
+
+
+        $scope.calculateFactorial=function(){
+            if($scope.inputNumber !== null && $scope.inputNumber >=0){
+                $scope.factorialResult=calculateFactorial($scope.inputNumber)
+            }
+            else{
+                $scope.factorialResult=null;
+                alert("Please enter a non negative number")
+            }
+        };
+
+        $scope.calculateSquare=function(){
+            if($scope.inputNumber !== null){
+                $scope.squareResult = $scope.inputNumber * $scope.inputNumber;
+            }
+            else{
+                $scope.squareResult=null;
+                alert("Please enter a number")
+            }
+        };
+
+        function calculateFactorial(n){
+            if(n==0 || n==1){
+                return 1;
+            }
+            else{
+                return n * calculateFactorial(n-1)
+            }
+        };
+    });
+</script>
+</html>

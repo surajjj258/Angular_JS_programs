@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="studentApp">
+
+<head>
+  <title>Student Details</title>
+  <script src=""></script>
+</head>
+
+<body ng-controller="studentController">
+
+    <h1>Student details</h1>
+Number of students: 
+    <input type="number" ng-model="numberOfStudents">
+    <button ng-click="displayStudentCount()">Display Count</button>
+
+    <div ng-show="showStudentDetails">
+        <h2>Student List</h2>
+
+        <ul>
+            <li ng-repeat="student in students | limitTo:numberOfStudents">
+                {{student.name}} - CGPA: {{student.cgpa}} 
+            </li>
+        </ul>
+      <p>  Total Students:
+        {{ students.length}}</p>
+    </div>
+    
+
+    <div ng-show="displayError">
+        Error: Number exceeds the total number of students.
+    </div>
+</body>
+
+<script>
+    var app=angular.module('studentApp',[]);
+    app.controller('studentController', function($scope){
+        $scope.students=[
+            {name: 'Rahul', cgpa:9},
+            {name: 'Ram', cgpa:9.8},
+            {name: 'Ramesh', cgpa:9.3},
+            {name: 'Ravi', cgpa:9.4}];
+
+    $scope.showStudentDetails=false;
+    $scope.displayError=false;
+
+    $scope.displayStudentCount=function(){
+        if($scope.numberOfStudents && $scope.numberOfStudents <= $scope.students.length){
+            $scope.showStudentDetails=true;
+    $scope.displayError=false;
+
+        }
+
+        else{
+            $scope.showStudentDetails=false;
+    $scope.displayError=true;
+        }
+    };
+
+});
+</script>
+
+</html>

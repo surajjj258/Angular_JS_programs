@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="calculatorApp">
+<head>
+    
+    <title>Angular calci</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="calculatorController" >
+    
+
+    <h1>Angular Js calculator</h1>  
+
+    <input type="number" ng-model="firstNumber" placeholder="Enter first number">
+
+    <select ng-model="selectedOperation">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+
+    <input type="number" ng-model="secondNumber" placeholder="Enter second number">
+
+    <button ng-click="performCalculation()">Calculate</button>
+    <br>
+
+    RESULT: {{ result }}
+
+</body>
+
+<script>
+    var app=angular.module('calculatorApp', []);
+
+    app.controller('calculatorController',function($scope){
+        $scope.firstNumber=0;
+        $scope.secondNumber=0;
+        $scope.selectedOperation='+';
+        $scope.result=0;
+
+        $scope.performCalculation= function(){
+            var num1=parseFloat($scope.firstNumber)
+            var num2=parseFloat($scope.secondNumber)
+
+            switch($scope.selectedOperation){
+                case '+':
+                    $scope.result = $scope.firstNumber + $scope.secondNumber;
+                    break;
+
+                    case '-':
+                    $scope.result = $scope.firstNumber - $scope.secondNumber;
+                    break;
+
+
+                    case '*':
+                    $scope.result = $scope.firstNumber * $scope.secondNumber;
+                    break;
+
+                    case '/':
+
+                    if(num2==0){
+                        alert("Cannot divide by 0")
+                        $scope.result='Error'
+                    }
+                    else{
+                    $scope.result = $scope.firstNumber / $scope.secondNumber;
+                    break;
+                    }
+
+                    default: $scope.result='Error'
+            };
+        };
+        
+
+
+    });
+</script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="shoppingApp">
+<head>
+    <title>Shopping list</title>
+    <script src=""></script>
+    <style>
+        ul{
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body ng-controller="shoppingController">
+
+    <h2>Shopping List</h2>
+
+    <ul>
+        <li ng-repeat="item in shoppingItems">
+            {{ item }}
+            <button ng-click="removeItem($index)">Remove</button>
+        </li>
+    </ul>
+    
+    <input type="text" ng-model="newItem">
+    <button ng-click="addItem()">Add item</button>
+    <p>{{ errortext}} </p>
+</body>
+
+<script>
+    var app=angular.module('shoppingApp', []);
+    app.controller('shoppingController', function($scope){
+        $scope.shoppingItems=['Milk', 'Honey', 'veg']
+
+        $scope.addItem=function(){
+            $scope.errortext='';
+            
+            if($scope.newItem && $scope.shoppingItems.indexOf($scope.newItem)===-1){
+                $scope.shoppingItems.push($scope.newItem);
+                $scope.newItem='';
+            }
+
+            else{
+                $scope.errortext="Item already exists"
+            }
+        };
+
+        $scope.removeItem=function(index){
+            $scope.shoppingItems.splice(index,1);
+        };
+
+        
+    });
+</script>
+</html>
